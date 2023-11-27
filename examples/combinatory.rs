@@ -12,7 +12,8 @@ fn main() {
 
     let start: Instant = Instant::now();
 
-    let res = combine(set.to_vec(), nb_element.try_into().unwrap(), nb_parties);
+    let binding = set.to_vec();
+    let res = combine(&binding, nb_element.try_into().unwrap(), nb_parties);
 
     let duration: Duration = start.elapsed();
     println!(
