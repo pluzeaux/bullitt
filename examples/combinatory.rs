@@ -12,7 +12,7 @@ fn main() {
 
     let start: Instant = Instant::now();
 
-    let res = combine(&set, nb_element.try_into().unwrap(), nb_parties);
+    let res = combine(set, nb_element.try_into().unwrap(), nb_parties);
 
     let duration: Duration = start.elapsed();
     println!(
