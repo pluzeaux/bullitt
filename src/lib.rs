@@ -16,3 +16,4 @@ pub mod miners;
 pub mod mode_in_bst;
 pub mod restore_array;
 pub mod two_sum;
+pub mod linked_list;
