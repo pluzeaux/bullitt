@@ -1,9 +1,9 @@
-use std::{rc::Rc, cell::RefCell, ops::{DerefMut, Deref}};
+use std::{rc::Rc, cell::RefCell};
 
 #[derive(Clone)]
 pub struct Cell<T> {
     succ: Link<T>,
-    value: T
+    value: T,
 }
 
 type Link<T> = Option<Rc<RefCell<Cell<T>>>>;
@@ -12,7 +12,7 @@ impl<T> Cell<T> {
     fn new(value: T) -> Rc<RefCell<Cell<T>>> {
         Rc::new(RefCell::new(Cell {
             succ: None,
-            value: value,
+            value,
         }))
     }
 }
@@ -22,6 +22,12 @@ pub struct LinkedList<T> {
     head: Link<T>,
     tail: Link<T>,
     count: i32
+}
+
+impl<T> Default for LinkedList<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<T> LinkedList<T> {
