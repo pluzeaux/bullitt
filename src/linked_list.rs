@@ -54,12 +54,45 @@ impl<T> LinkedList<T> {
 
 #[cfg(test)]
 mod tests {
-    use crate::linked_list::LinkedList;
+    use std::borrow::BorrowMut;
+
+    use crate::linked_list::{LinkedList, Cell, Link};
 
     #[test]
     fn create_linked_list() {
         let mut ll = LinkedList::new();
         ll.add_cell(1);
         assert_eq!(1, ll.count)
+    }
+
+    #[test]
+    fn add_multiple_values() {
+        let mut ll = LinkedList::new();
+        for n in 1..=100 {
+            ll.add_cell(n)
+        }
+        // let _ = (1..=100).into_iter().map(|n| ll.add_cell(n));
+        assert_eq!(100, ll.count)
+    }
+
+    #[test]
+    fn display_multiple_values() {
+        let mut ll = LinkedList::new();
+        for n in 1..=100 {
+            ll.add_cell(n)
+        }
+
+        let mut stack: Vec<Link<i32>> = Vec::new();
+        stack.push(ll.head);
+
+        while let Some(link) = stack.pop() {
+            if let Some(l) = link {
+                let cell = (*l).clone().into_inner();
+                stack.push(cell.succ);
+                println!("Cell value: {}", cell.value);
+            }  
+        }
+
+        assert_eq!(100, ll.count)
     }
 }
